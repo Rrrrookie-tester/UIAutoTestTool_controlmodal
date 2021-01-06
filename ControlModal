@@ -1,0 +1,71 @@
+class ControlModal:
+    def __init__(self, driver):
+        self.driver = driver
+
+    def control_modal_element(self, control_type, get_element_type, get_element_value, element_order_num, key_value):
+        # 操控模态窗中元素（2.0版本）;control_type:操控种类（目前支持点击、传递文本、传递日期）;get_element_type:获取元素所采用的定位方法;
+        # get_element_value:获取元素的定位值;element_order_num为元素在获取到的元素组的排位（需传递真实物理排位，代码会自动将排位转换为数组下标）
+        # key_value:需要传递的值
+        if control_type == 'click':
+            if get_element_type == 'class name':
+                js = "elements = document.getElementsByClassName('"+get_element_value+"'); " \
+                     "element = elements["+str(element_order_num-1)+"]; element.click();"
+                self.driver.execute_script(js)
+            if get_element_type == 'name':
+                js = "elements = document.getElementsByName('"+get_element_value+"');" \
+                     " element = elements["+str(element_order_num-1)+"]; element.click();"
+                self.driver.execute_script(js)
+            if get_element_type == 'tag name':
+                js = "elements = document.getElementsByTagName('"+get_element_value+"');" \
+                     " element = elements["+str(element_order_num-1)+"]; element.click();"
+                self.driver.execute_script(js)
+            if get_element_type == 'id':
+                js = "element = document.getElementById('"+get_element_value+"'); element.click();"
+                self.driver.execute_script(js)
+        if control_type == 'send_string':
+            if get_element_type == 'class name':
+                js = "elements = document.getElementsByClassName('"+get_element_value+"');" \
+                     " element = elements["+str(element_order_num-1)+"]; element.value=\""+ str(key_value) +"\";" \
+                     "var event = document.createEvent('HTMLEvents');event.initEvent(\"input\", true, true);" \
+                     "event.eventType = 'message';element.dispatchEvent(event);"
+                self.driver.execute_script(js)
+            if get_element_type == 'name':
+                js = "elements = document.getElementsByName('"+get_element_value+"');" \
+                     " element = elements["+str(element_order_num-1)+"]; element.value=\""+ str(key_value) +"\";" \
+                     "var event = document.createEvent('HTMLEvents');event.initEvent(\"input\", true, true);" \
+                     "event.eventType = 'message';element.dispatchEvent(event);"
+                self.driver.execute_script(js)
+            if get_element_type == 'tag name':
+                js = "elements = document.getElementsByName('"+get_element_value+"');" \
+                     " element = elements["+str(element_order_num-1)+"]; element.value=\""+ str(key_value) +"\";" \
+                     "var event = document.createEvent('HTMLEvents');event.initEvent(\"input\", true, true);" \
+                     "event.eventType = 'message';element.dispatchEvent(event);"
+                self.driver.execute_script(js)
+            if get_element_type == 'id':
+                js = "element = document.getElementById('"+get_element_value+"'); element.click();"
+                self.driver.execute_script(js)
+        if control_type == 'send date':
+            if get_element_type == 'class name':
+                js = "elements = document.getElementsByClassName('"+get_element_value+"'); element = elements[0];" \
+                     "element.removeAttribute(\"readonly\");element.value = '"+key_value+"';" \
+                     "var event = document.createEvent('HTMLEvents');event.initEvent(\"input\", true, true);" \
+                     "event.eventType = 'message';element.dispatchEvent(event);"
+                self.driver.execute_script(js)
+            if get_element_type == 'tag name':
+                js = "elements = document.getElementsByClassName('"+get_element_value+"'); element = elements[0];" \
+                     "element.removeAttribute(\"readonly\");element.value = '"+key_value+"';" \
+                     "var event = document.createEvent('HTMLEvents');event.initEvent(\"input\", true, true);" \
+                     "event.eventType = 'message';element.dispatchEvent(event);"
+                self.driver.execute_script(js)
+            if get_element_type == 'name':
+                js = "elements = document.getElementsByClassName('"+get_element_value+"'); element = elements[0];" \
+                     "element.removeAttribute(\"readonly\");element.value = '"+key_value+"';" \
+                     "var event = document.createEvent('HTMLEvents');event.initEvent(\"input\", true, true);" \
+                     "event.eventType = 'message';element.dispatchEvent(event);"
+                self.driver.execute_script(js)
+            if get_element_type == 'id':
+                js = "elements = document.getElementsByClassName('"+get_element_value+"'); element = elements[0];" \
+                     "element.removeAttribute(\"readonly\");element.value = '"+key_value+"';" \
+                     "var event = document.createEvent('HTMLEvents');event.initEvent(\"input\", true, true);" \
+                     "event.eventType = 'message';element.dispatchEvent(event);"
+                self.driver.execute_script(js)
